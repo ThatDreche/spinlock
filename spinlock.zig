@@ -5,11 +5,10 @@ const Thread = std.Thread;
 
 pub const Spinlock = struct {
     const Self = @This();
-    const State = enum(usize) { Unlocked = 0, Locked };
+    const State = enum(u8) { Unlocked = 0, Locked };
     const AtomicState = std.atomic.Value(State);
 
-    // fuck false sharing
-    value: AtomicState align(std.atomic.cache_line) = AtomicState.init(.Unlocked),
+    value: AtomicState = AtomicState.init(.Unlocked),
 
     pub fn lock(self: *Self) void {
         while (true) {
