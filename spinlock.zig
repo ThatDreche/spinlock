@@ -13,7 +13,7 @@ pub const Spinlock = struct {
     pub fn lock(self: *Self) void {
         while (true) {
             switch (self.value.swap(.Locked, .acquire)) {
-                .Locked => {},
+                .Locked => std.atomic.spinLoopHint(),
                 .Unlocked => break,
             }
         }
