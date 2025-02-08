@@ -1,6 +1,6 @@
 .{
-    .name = "cpu-driver",
-    .version = "0.0.1",
+    .name = "spinlock",
+    .version = "0.0.3",
     //.minimum_zig_version = "0.14.0",
 
     .paths = .{
@@ -8,6 +8,6 @@
         "build.zig.zon",
         "spinlock.zig",
         "LICENSE",
-        "README.md"
+        "README.md",
     },
 }
