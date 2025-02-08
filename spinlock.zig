@@ -1,7 +1,4 @@
 const std = @import("std");
-const testing = std.testing;
-const builtin = @import("builtin");
-const Thread = std.Thread;
 
 pub const Spinlock = struct {
     const Self = @This();
@@ -35,10 +32,10 @@ test "basics" {
     var lock = Spinlock{};
 
     lock.lock();
-    try testing.expect(!lock.tryLock());
+    try std.testing.expect(!lock.tryLock());
     lock.unlock();
 
-    try testing.expect(lock.tryLock());
-    try testing.expect(!lock.tryLock());
+    try std.testing.expect(lock.tryLock());
+    try std.testing.expect(!lock.tryLock());
     lock.unlock();
 }
