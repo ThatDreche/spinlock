@@ -18,8 +18,8 @@ pub const Spinlock = struct {
 
     pub fn tryLock(self: *Self) bool {
         return switch (self.value.swap(.Locked, .acquire)) {
-            .Locked => return false,
-            .Unlocked => return true,
+            .Locked => false,
+            .Unlocked => true,
         };
     }
 
