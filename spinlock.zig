@@ -8,11 +8,8 @@ pub const Spinlock = struct {
     value: AtomicState = AtomicState.init(.Unlocked),
 
     pub fn lock(self: *Self) void {
-        while (true) {
-            switch (self.value.swap(.Locked, .acquire)) {
-                .Locked => std.atomic.spinLoopHint(),
-                .Unlocked => break,
-            }
+        while (!self.tryLock()) {
+            std.atomic.spinLoopHint();
         }
     }
 
